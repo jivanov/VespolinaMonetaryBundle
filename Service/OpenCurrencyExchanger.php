@@ -21,7 +21,6 @@ class OpenCurrencyExchanger extends CurrencyExchanger
 
     public function __construct()
     {
-        $this->openObject = $this->getExchangeRates();
         $this->timeout = 2500;
     }
 
