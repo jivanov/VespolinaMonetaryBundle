@@ -22,8 +22,13 @@ class GoogleCurrencyExchanger extends CurrencyExchanger
     {
         $from = $this->extractCode($from);
         $to = $this->extractCode($to);
-        $url = sprintf("http://www.google.com/ig/calculator?hl=en&q=1%s%3D%3F%s", $from, $to);
-        $conversion = wget($url);
-        return $conversion;
+        $url = sprintf("http://www.google.com/ig/calculator?hl=en&q=1%s%%3D%%3F%s", $from, $to);
+        $conversion = file_get_contents($url);
+
+        preg_match('/lhs:\s*"([0-9\.]+)\s/', $conversion, $_from);
+        preg_match('/rhs:\s*"([0-9\.]+)\s/', $conversion, $_to);
+
+        $rate = bcdiv($_from[1], $_to[1], 8); // PEN/USD (26) / EUR/USD (7)
+        return $rate;
     }
 }

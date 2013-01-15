@@ -112,7 +112,7 @@ class MonetaryManager implements MonetaryManagerInterface
         $exchangeRate = $this->currencyManager->getExchangeRate($baseCurrency, $currency);
         $value = (float)$this->rounding(bcmul((string)$monetary->getValue(),(string)$exchangeRate, 16),
                                         $baseCurrency->getPrecision());
-        return $this->createMonetary($value, $baseCurrency);
+        return $this->createMonetary($value, $currency);
     }
 
     /**
