@@ -109,6 +109,11 @@ class MonetaryManager implements MonetaryManagerInterface
     public function exchange(MonetaryInterface $monetary, $currency, \DateTime $datetime=null)
     {
         $baseCurrency = $monetary->getCurrency();
+
+        if ($baseCurrency->equals($currency)) {
+            return $monetary;
+        }
+
         $exchangeRate = $this->currencyManager->getExchangeRate($baseCurrency, $currency);
         $value = (float)$this->rounding(bcmul((string)$monetary->getValue(),(string)$exchangeRate, 16),
                                         $baseCurrency->getPrecision());

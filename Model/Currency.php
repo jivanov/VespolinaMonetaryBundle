@@ -22,6 +22,11 @@ abstract class Currency implements CurrencyInterface
         return sprintf('%s%s', $this->getSymbol(), $this->rounding($amount));
     }
 
+    public function equals($currency)
+    {
+        return $currency->getCurrencyCode() == $this->getCurrencyCode();
+    }
+
     protected function rounding($amount)
     {
         $roundUp = '.'.substr('0000000000000005', -($this->getPrecision() + 1));
