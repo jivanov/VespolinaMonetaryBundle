@@ -28,6 +28,10 @@ class GoogleCurrencyExchanger extends CurrencyExchanger
         preg_match('/lhs:\s*"([0-9\.]+)\s/', $conversion, $_from);
         preg_match('/rhs:\s*"([0-9\.]+)\s/', $conversion, $_to);
 
+        if (intval($_from[1]) === 1) {
+            return $_to[1];
+        }
+
         $rate = bcdiv($_from[1], $_to[1], 8); // PEN/USD (26) / EUR/USD (7)
         return $rate;
     }

@@ -26,7 +26,7 @@ interface MonetaryInterface
     /**
      * Get the currency of the monetary amount.
      *
-     * @return Vespolina\MonetaryBundle\Model\MonetaryInterface
+     * @return Vespolina\MonetaryBundle\Model\CurrencyInterface
      */
     public function getCurrency();
 
